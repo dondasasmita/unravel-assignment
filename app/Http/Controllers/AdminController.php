@@ -45,7 +45,9 @@ class AdminController extends Controller
 
         $request->session()->put('admin-authenticated', true);
 
-        return view('admin.index');
+        $items = Item::all();
+
+        return redirect()->route('admin.index', ['items' => $items]);
     }
 
 
