@@ -68,4 +68,17 @@ class CartController extends Controller
 
 		return view('shop.checkout', ['total' => $total]);
 	}
+
+	public function clear(Request $request)
+	{
+
+		if (!Session::has('cart')) {
+			return redirect()->route('home');
+		}
+
+		$request->session()->forget('cart');
+
+		return redirect()->route('home');
+
+	}
 }

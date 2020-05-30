@@ -29,10 +29,10 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <a href="{{ route('checkout') }}" class="btn btn-primary">Pay with Stripe</a>
+            <a href="{{ route('cart.checkout') }}" class="btn btn-primary">Pay with Stripe</a>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-danger">Cancel</button>
+            <a href="{{ route('cart.clear') }}" class="btn btn-danger">Cancel</a>
         </div>
     </div>
     @else
