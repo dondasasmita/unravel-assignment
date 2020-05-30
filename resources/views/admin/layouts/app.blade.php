@@ -40,6 +40,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+                    @if(Session::has('admin-authenticated'))
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <li class="nav-item dropdown">
@@ -59,6 +60,7 @@
                                 </div>
                             </li>
                     </ul>
+                    @endif
                 </div>
             </div>
         </nav>
