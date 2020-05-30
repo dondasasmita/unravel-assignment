@@ -7,6 +7,7 @@ use Session;
 use App\Cart as Cart;
 use App\Item;
 use Auth;
+use App\Transaction;
 
 
 class CartController extends Controller
@@ -102,16 +103,19 @@ class CartController extends Controller
 			);
 
 		} catch (Exception $e) {
-
 			// TODO handle error send message to user view
 			dd($e->getMessage());
 		}
 
+		Transaction::create([
+			'user_id' => Auth::user()->id,
+			'stripe_txn_id' => $charge->id,
+			'amount_paid' => $charge->amount / 100
+		]);
 
-		$user_id = Auth::user()->id;
-		$transaction_id = $charge->id;
-		$amount_paid = $charge->amount / 100; // to dollars
+		$request->session()->forget('cart');
 
-		// TODO: Create Transaction Record
+		return redirect()->route('home');
 	}
+
 }
