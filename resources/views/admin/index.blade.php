@@ -26,7 +26,7 @@
 					<td>{{$item->name}}</td>
 					<td>{{$item->price}}</td>
 					<td>{{!empty($item->description) ? $item->description : 'N/A'}}</td>
-					<td><a href="{{route('admin.edit.item', ['id' => $item->id])}}">Edit</a> | <a href="">Delete</a> </td>
+					<td><a href="{{route('admin.edit.item', ['id' => $item->id])}}">Edit</a> | <a href="{{route('admin.delete.item', ['id' => $item->id])}}" onclick="alert('Are you sure?')">Delete</a> </td>
 				</tr>
 				@endforeach
 			</tbody>

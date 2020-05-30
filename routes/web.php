@@ -52,6 +52,11 @@ Route::group(['prefix' => 'admin'], function () {
 		'as' => 'admin.edit.item'
 	]);
 
+	Route::get('/items/delete/{id}', [
+		'uses' => 'ItemsController@destroy',
+		'as' => 'admin.delete.item'
+	]);
+
 	Route::post('/login', [
 		'uses' => 'AdminController@login',
 		'as' => 'admin.login'
@@ -66,6 +71,8 @@ Route::group(['prefix' => 'admin'], function () {
 		'uses' => 'AdminController@userTransactions',
 		'as' => 'admin.user.transactions'
 	]);
+
+
 
 	
 });

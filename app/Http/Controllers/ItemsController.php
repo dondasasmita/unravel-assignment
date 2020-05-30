@@ -111,8 +111,17 @@ class ItemsController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Request $request, $id)
     {
-        //
+        if (!Session::has('admin-authenticated') || Session::get('admin-authenticated') !== true) {
+            return false;
+        }
+
+        $item = Item::findOrFail($id);
+
+        $item->delete();
+
+        return redirect()->route('admin.index');
+        
     }
 }
