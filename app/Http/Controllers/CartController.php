@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\Cart as Cart;
 use App\Item;
+use Auth;
 
 
 class CartController extends Controller
@@ -84,6 +85,33 @@ class CartController extends Controller
 
 	public function pay(Request $request)
 	{
-		dd($request->all());
+		$amount_to_charge = (float)$request->input('total');
+
+		$token = $request->input('stripeToken');
+
+		\Stripe\Stripe::setApiKey('sk_test_8xxcMFYiQqqsT3iGL1s7SDsi');
+
+		try {
+
+			$charge = \Stripe\Charge::create(
+				array(
+					'amount' =>  $amount_to_charge * 100,
+					'currency' => 'sgd',
+					'source' => $token
+				)
+			);
+
+		} catch (Exception $e) {
+
+			// TODO handle error send message to user view
+			dd($e->getMessage());
+		}
+
+
+		$user_id = Auth::user()->id;
+		$transaction_id = $charge->id;
+		$amount_paid = $charge->amount / 100; // to dollars
+
+		// TODO: Create Transaction Record
 	}
 }
