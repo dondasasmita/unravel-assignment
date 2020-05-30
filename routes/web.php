@@ -72,6 +72,15 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/add-to-cart/{id}', 'ItemsController@addToCart')->name('items.addToCart');
-Route::get('/cart', 'ItemsController@getCart')->name('cart.show');
-Route::get('/checkout', 'ItemsController@checkout')->name('checkout');
+Route::get('/add-to-cart/{id}', 'CartController@add')->name('items.addToCart');
+Route::get('/cart', 'CartController@show')->name('cart.show');
+Route::get('/checkout', 'CartController@checkout')->name('checkout');
+
+
+
+
+
+
+
+
+

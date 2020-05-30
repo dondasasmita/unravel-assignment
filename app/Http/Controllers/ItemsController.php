@@ -41,51 +41,7 @@ class ItemsController extends Controller
         return view('admin.item.new');
     }
 
-    public function addToCart(Request $request, $id)
-    {
-        $item = Item::find($id);
-        
-        $existing_cart = Session::has('cart') ? Session::get('cart') : null;
 
-        $cart = new Cart($existing_cart);
-        $cart->add($item, $item->id);
-
-        $request->session()->put('cart', $cart);
-
-        return redirect()->route('home');
-    }
-
-    public function getCart()
-    {
-        if (!Session::has('cart')) {
-            return view('shop.cart', ['products' => null]);
-        }
-
-        $existing_cart = Session::get('cart');
-
-        $cart = new Cart($existing_cart);
-
-
-        return view('shop.cart', [
-            'products' => $cart->chosen_items,
-            'total_price' => $cart->total_price
-        ]);
-    }
-
-    public function checkout()
-    {
-        if (!Session::has('cart')) {
-            return redirect()->route('home');
-        }
-
-        $existing_cart = Session::get('cart');
-
-        $cart = new Cart($existing_cart);
-
-        $total = $cart->total_price;
-
-        return view('shop.checkout', ['total' => $total]);
-    }
 
     /**
      * Show the form for creating a new resource.
