@@ -81,4 +81,9 @@ class CartController extends Controller
 		return redirect()->route('home');
 
 	}
+
+	public function pay(Request $request)
+	{
+		dd($request->all());
+	}
 }

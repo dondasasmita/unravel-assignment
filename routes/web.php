@@ -76,6 +76,7 @@ Route::get('/add-to-cart/{id}', 'CartController@add')->name('items.addToCart');
 Route::get('/cart', 'CartController@show')->name('cart.show');
 Route::get('/checkout', 'CartController@checkout')->name('cart.checkout');
 Route::get('/clear-cart', 'CartController@clear')->name('cart.clear');
+Route::post('/payment',  'CartController@pay')->name('payment');
 
 
 

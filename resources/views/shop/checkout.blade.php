@@ -1,33 +1,72 @@
 @extends('layouts.app')
 
+@section('style')
+
+<style>
+              /**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+ .StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+</style>
+@endsection
+
 @section('content')
 <div class="container">
-    <div class="col-sm-12 col-md-8">
-      <h3>Checkout</h3>
-      <h3>Total : {{ $total }}</h3>
-      <form action="{{ route('checkout')}}" method="POST">
-        @csrf
-        <div class="form-row">
-          <label for="card-element">
-            Stripe
-          </label>
-          <div class="products">
-            <input type="text" name="order_id" value="123456123564" hidden>
-          </div>
-          <div id="card-element">
-            <!-- A Stripe Element will be inserted here. -->
-          </div>
-          <!-- Used to display form errors. -->
-          <div id="card-errors" role="alert"></div>
-      <button class="btn btn-primary">Submit Payment</button>
-      </form>
+  <div class="col-sm-12 col-md-8">
+    <h3>Checkout</h3>
+    <h3>Total : {{ $total }}</h3>
+    
+    <form action="{{ route('payment')}}" method="POST" id="payment-form">
+      @csrf
+      <div class="form-row">
+        <div class="products">
+          <input type="number" name="total" value="{{$total}}" hidden>
+        </div>
+        <div id="card-element" class="form-control">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+      </div>
+      <div class="form-row mt-5">
+        <button class="btn btn-primary">Submit Payment</button>
+      </div>
+    </form>
+     
 
-    </div>
+  </div>
 </div>
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
 // Create a Stripe client.
-var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+var stripe = Stripe('pk_test_a78TDAY3K7ocfXBVBZIYC141');
 
 // Create an instance of Elements.
 var elements = stripe.elements();
