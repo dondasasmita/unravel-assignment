@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Item;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -23,8 +24,9 @@ class AdminController extends Controller
         }
 
         $items = Item::all();
+        $users = User::all();
 
-        return view('admin.index', ['items' => $items]);
+        return view('admin.index', ['items' => $items, 'users' => $users]);
     }
 
     /**
@@ -125,4 +127,22 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function userTransactions($user_id)
+    {
+        if (!Session::has('admin-authenticated') || Session::get('admin-authenticated') !== true) {
+            return false;
+        }
+
+        $user = User::find($user_id);
+        
+        $transactions = $user->transactions;
+
+        return view('admin.user.transactions', [
+            'user' => $user, 
+            'transactions' => $transactions
+        ]);
+        
+    }
+
 }

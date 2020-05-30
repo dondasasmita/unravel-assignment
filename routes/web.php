@@ -62,6 +62,11 @@ Route::group(['prefix' => 'admin'], function () {
 		'as' => 'admin.logout'
 	]);
 
+	Route::get('/users/transactions/{user_id}', [
+		'uses' => 'AdminController@userTransactions',
+		'as' => 'admin.user.transactions'
+	]);
+
 	
 });
 

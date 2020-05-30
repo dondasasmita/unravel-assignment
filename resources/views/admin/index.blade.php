@@ -32,5 +32,30 @@
 			</tbody>
 		</table>
 	</div>
+		<div class="row">
+		<h5>List Of Users</h5>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Email</th>
+					<th scope="col">Name</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($users as $user)
+				<tr>
+					<td>{{$user->id}}</td>
+					<td>{{$user->email}}</td>
+					<td>{{$user->name}}</td>
+					<td>
+						<a href="{{route('admin.user.transactions', ['user_id' => $user->id])}}">View Transactions</a>
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
 </div>
 @endsection
