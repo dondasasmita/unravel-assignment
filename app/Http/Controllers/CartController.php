@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -90,7 +89,7 @@ class CartController extends Controller
 
 		$token = $request->input('stripeToken');
 
-		\Stripe\Stripe::setApiKey('sk_test_8xxcMFYiQqqsT3iGL1s7SDsi');
+		\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET'));
 
 		try {
 
